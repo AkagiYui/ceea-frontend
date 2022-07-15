@@ -2,7 +2,7 @@
 import { NH2, NSpace, NDivider, NButtonGroup, NButton, NIcon } from "naive-ui";
 import { WeatherMoon16Regular, WeatherSunny16Regular } from "@vicons/fluent";
 import { useStatusStore } from "@/stores/status";
-import '@wangeditor/editor/dist/css/style.css' // 引入 css
+import "@wangeditor/editor/dist/css/style.css"; // 引入 css
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 import { onBeforeUnmount, ref, shallowRef, onMounted } from "vue";
 

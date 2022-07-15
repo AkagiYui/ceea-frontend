@@ -10,7 +10,7 @@ declare global {
   }
 
   interface ServerData {
-    code: string;
+    code: number;
     msg: string;
     data: object | string;
   }

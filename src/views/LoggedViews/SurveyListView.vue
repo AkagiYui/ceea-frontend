@@ -54,7 +54,7 @@ function createOneSurvey() {
   createSurvey()
     .then((r) => {
       const { data: res } = r;
-      if (res.code === "200") {
+      if (res.code === 200) {
         openSurvey(res.data as string);
         window.$message.success(res.data as string);
         window.$loadingBar.finish();
@@ -85,7 +85,7 @@ function deleteOneSurvey(row: SurveyInfo) {
       deleteSurvey(row.id)
         .then((r) => {
           const { data: res } = r;
-          if (res.code === "200") {
+          if (res.code === 200) {
             window.$loadingBar.finish();
             displayData();
           } else {
@@ -222,7 +222,7 @@ function setActive(row: SurveyInfo) {
   window.$loadingBar.start();
   setSurveyActive(row.id, !row.isActive)
     .then((res) => {
-      if (res.data.code === "200") {
+      if (res.data.code === 200) {
         row.isActive = !row.isActive;
         window.$loadingBar.finish();
       } else {

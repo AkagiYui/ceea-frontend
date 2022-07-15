@@ -58,21 +58,21 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(Settings24Regular),
     children: [
       {
-        label: '角色管理',
-        key: 'rat',
+        label: "角色管理",
+        key: "rat",
         icon: renderIcon(ShareScreenPersonP24Regular),
       },
       {
-        label: '用户管理',
-        key: 'rat',
+        label: "用户管理",
+        key: "rat",
         icon: renderIcon(PersonEdit24Regular),
       },
       {
-        label: '文件管理',
-        key: 'rat',
+        label: "文件管理",
+        key: "rat",
         icon: renderIcon(Folder24Regular),
       },
-    ]
+    ],
   },
   {
     label: "培养方案管理",

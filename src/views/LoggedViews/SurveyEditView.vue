@@ -32,6 +32,7 @@ interface SurveyInfo {
   description: string;
   password: string;
   questionTypes: QuestionType[];
+  questions: [];
 }
 
 const route = useRoute();
@@ -45,6 +46,7 @@ const survey = ref<SurveyInfo>({
   description: "",
   password: "",
   questionTypes: [],
+  questions: [],
 });
 
 function getSurvey() {
