@@ -8,7 +8,7 @@ const router = createRouter({
     {
       path: "/",
       name: "main",
-      component: () => import("../views/LoggedViews/MainView.vue"),
+      component: () => import("../views/MainView.vue"),
       meta: {
         title: "主页",
         requiresAuth: true,
@@ -18,36 +18,63 @@ const router = createRouter({
         {
           path: "/overview",
           name: "overview",
-          component: () => import("../views/LoggedViews/OverviewView.vue"),
+          component: () => import("../views/OverviewView.vue"),
           meta: {
             title: "总览",
             requiresAuth: true,
           },
         },
         {
+          path: "/system",
+          name: "system",
+          component: () => import("../views/PersonInfoView.vue"),
+          meta: {
+            title: "系统管理",
+            requiresAuth: true,
+          },
+        },
+        {
           path: "/survey",
           name: "survey",
-          component: () => import("../views/LoggedViews/SurveyListView.vue"),
+          redirect: { name: "survey-overview" },
           meta: {
             title: "问卷",
             requiresAuth: true,
           },
         },
         {
+          path: "/survey/overview",
+          name: "survey-overview",
+          component: () => import("../views/SurveyViews/OverviewView.vue"),
+          meta: {
+            title: "问卷总览",
+            requiresAuth: true,
+          },
+        },
+        {
+          path: "/survey/list",
+          name: "survey-list",
+          component: () => import("../views/SurveyViews/ListView.vue"),
+          meta: {
+            title: "问卷列表",
+            requiresAuth: true,
+          },
+        },
+        {
           path: "/setting",
           name: "setting",
-          component: () => import("../views/LoggedViews/SettingView.vue"),
+          component: () => import("../views/PersonInfoView.vue"),
           meta: {
-            title: "设置",
+            title: "个人设置",
             requiresAuth: true,
           },
         },
       ],
     },
     {
-      path: "/edit",
-      name: "edit",
-      component: () => import("../views/LoggedViews/SurveyEditView.vue"),
+      path: "/survey/edit",
+      name: "survey-edit",
+      component: () => import("../views/SurveyViews/EditView.vue"),
       meta: {
         title: "编辑",
         requiresAuth: true,
@@ -64,15 +91,15 @@ const router = createRouter({
     {
       path: "/success",
       name: "success",
-      component: () => import("../views/ResultViews/CommitSucceedView.vue"),
+      component: () => import("../views/SurveyViews/CommitSucceedView.vue"),
       meta: {
         title: "成功",
       },
     },
     {
       path: "/:pathMatch(.*)*",
-      name: "NotFound",
-      component: () => import("../views/ResultViews/NotFoundView.vue"),
+      name: "error",
+      component: () => import("../views/NotFoundView.vue"),
       meta: {
         title: "发生错误",
       },

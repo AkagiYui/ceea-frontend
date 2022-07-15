@@ -6,6 +6,8 @@ import { RouterLink, useRoute } from "vue-router";
 import {
   // ClipboardDataBar24Regular,
   AppsList24Regular,
+  ClipboardTaskListRtl24Regular,
+  DataTrending24Regular,
   Settings24Regular,
   VideoPersonSparkle24Regular,
   Home24Regular,
@@ -54,7 +56,7 @@ const menuOptions: MenuOption[] = [
   },
   {
     label: "系统管理",
-    key: "setting",
+    key: "setting6",
     icon: renderIcon(Settings24Regular),
     children: [
       {
@@ -76,40 +78,64 @@ const menuOptions: MenuOption[] = [
   },
   {
     label: "培养方案管理",
-    key: "setting",
+    key: "setting4",
     icon: renderIcon(Settings24Regular),
   },
   {
     label: "课程教学过程管理",
-    key: "setting",
+    key: "setting3",
     icon: renderIcon(Settings24Regular),
   },
   {
     label: "课程目标达成度",
-    key: "setting",
+    key: "setting2",
     icon: renderIcon(Settings24Regular),
   },
   {
     label: "毕业要求达成度",
-    key: "setting",
+    key: "setting1",
     icon: renderIcon(Settings24Regular),
   },
   {
-    label: () =>
-      h(
-        RouterLink,
-        {
-          to: {
-            name: "survey",
-            params: {
-              lang: "zh-CN",
+    label: "调查问卷",
+    key: "survey-overview",
+    icon: renderIcon(ClipboardTaskListRtl24Regular),
+    children: [
+      {
+        label: () =>
+          h(
+            RouterLink,
+            {
+              to: {
+                name: "survey-overview",
+                params: {
+                  lang: "zh-CN",
+                },
+              },
             },
-          },
-        },
-        { default: () => "调查问卷" }
-      ),
-    key: "survey",
-    icon: renderIcon(AppsList24Regular),
+            { default: () => "问卷概览" }
+          ),
+        key: "survey-overview",
+        icon: renderIcon(DataTrending24Regular),
+      },
+      {
+        label: () =>
+          h(
+            RouterLink,
+            {
+              to: {
+                name: "survey-list",
+                params: {
+                  lang: "zh-CN",
+                },
+              },
+            },
+            { default: () => "问卷列表" }
+          ),
+        key: "survey-list",
+        icon: renderIcon(AppsList24Regular),
+      },
+    ],
   },
   {
     label: () =>
@@ -123,7 +149,7 @@ const menuOptions: MenuOption[] = [
             },
           },
         },
-        { default: () => "个人信息" }
+        { default: () => "个人设置" }
       ),
     key: "setting",
     icon: renderIcon(VideoPersonSparkle24Regular),
@@ -133,6 +159,7 @@ const menuOptions: MenuOption[] = [
 
 <template>
   <NMenu
+    accordion
     :collapsed="props.collapsed"
     :collapsed-width="64"
     :collapsed-icon-size="22"

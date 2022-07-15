@@ -57,7 +57,7 @@ function getSurvey() {
   });
 }
 
-function addQuestion(type: any) {
+function addQuestion(type: QuestionType) {
   console.log(type);
 }
 

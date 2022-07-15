@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NIcon, NDropdown, NH2 } from "naive-ui";
+import { NIcon, NDropdown, NH2, NAvatar } from "naive-ui";
 import { TITLE } from "@/config";
 import { h, type Component } from "vue";
 import { LogOutOutline as LogoutIcon, ChevronDown } from "@vicons/ionicons5";
@@ -43,8 +43,14 @@ const options = [
       </RouterLink>
     </div>
     <NDropdown :options="options" placement="bottom-end" @select="handleSelect">
-      <!-- TODO: 人名与箭头水平对齐 -->
+      <!-- TODO: 头像/人名/箭头水平 对齐且居中 -->
       <div style="margin-right: 30px">
+        <NAvatar
+          style="margin-right: 5px; margin-top: 0px"
+          round
+          size="small"
+          src="https://q2.qlogo.cn/headimg_dl?spec=100&dst_uin=1050314133"
+        />
         <span style="line-height: 100%; font-size: 16px">
           {{ status.userInfo.name }}
         </span>

@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { NH2, NSpace, NDivider, NButtonGroup, NButton, NIcon } from "naive-ui";
+import {
+  NSpace,
+  NDivider,
+  NButtonGroup,
+  NButton,
+  NIcon,
+  NCard,
+  NImage,
+} from "naive-ui";
 import { WeatherMoon16Regular, WeatherSunny16Regular } from "@vicons/fluent";
 import { useStatusStore } from "@/stores/status";
 import "@wangeditor/editor/dist/css/style.css"; // 引入 css
@@ -11,7 +19,7 @@ const valueHtml = ref("<p>hello</p>"); // 内容 HTML
 const toolbarConfig = {};
 const mode = ref("default");
 const editorConfig = { placeholder: "请输入内容..." };
-const handleCreated = (editor: any) => {
+const handleCreated = (editor: object) => {
   editorRef.value = editor; // 记录 editor 实例，重要！
 };
 
@@ -37,30 +45,41 @@ onBeforeUnmount(() => {
 
 <template>
   <NSpace vertical>
-    <NH2>请前往 工程教育认证系统 修改你的个人信息</NH2>
-    <NSpace style="display: flex">
-      <span style="align-self: center">主题</span>
-      <NButtonGroup>
-        <NButton
-          @click="setTheme(false)"
-          :type="!status.darkMode ? 'primary' : 'default'"
-        >
-          <template #icon>
-            <NIcon><WeatherSunny16Regular /></NIcon>
-          </template>
-          亮色
-        </NButton>
-        <NButton
-          @click="setTheme(true)"
-          :type="status.darkMode ? 'primary' : 'default'"
-        >
-          <template #icon>
-            <NIcon><WeatherMoon16Regular /></NIcon>
-          </template>
-          暗色
-        </NButton>
-      </NButtonGroup>
-    </NSpace>
+    <NCard title="个人信息">
+      <NSpace vertical>
+        <NImage
+          :show-toolbar="false"
+          width="100"
+          src="https://q1.qlogo.cn/g?b=qq&nk=1050314133&s=640"
+        />
+        <NButton>更换头像</NButton>
+      </NSpace>
+    </NCard>
+    <NCard title="系统设置">
+      <NSpace style="display: flex">
+        <span style="align-self: center">主题</span>
+        <NButtonGroup>
+          <NButton
+            @click="setTheme(false)"
+            :type="!status.darkMode ? 'primary' : 'default'"
+          >
+            <template #icon>
+              <NIcon><WeatherSunny16Regular /></NIcon>
+            </template>
+            亮色
+          </NButton>
+          <NButton
+            @click="setTheme(true)"
+            :type="status.darkMode ? 'primary' : 'default'"
+          >
+            <template #icon>
+              <NIcon><WeatherMoon16Regular /></NIcon>
+            </template>
+            暗色
+          </NButton>
+        </NButtonGroup>
+      </NSpace>
+    </NCard>
   </NSpace>
 
   <NDivider title-placement="right">

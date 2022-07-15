@@ -70,7 +70,7 @@ function createOneSurvey() {
 }
 
 function openSurvey(id: string) {
-  const route = router.resolve({ name: "edit", query: { id } });
+  const route = router.resolve({ name: "survey-edit", query: { id } });
   window.open(route.href, "_blank");
 }
 

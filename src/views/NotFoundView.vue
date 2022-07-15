@@ -17,7 +17,7 @@ function handleClick() {
     description="需要帮助请联系管理员"
   >
     <template #footer>
-      <NButton @click="handleClick">回到主页</NButton>
+      <NButton @click="handleClick">回到首页</NButton>
     </template>
   </NResult>
 </template>
