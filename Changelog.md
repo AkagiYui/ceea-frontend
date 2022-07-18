@@ -1,5 +1,13 @@
 ## Changelog
 
+## 2022-07-18
+
+- 移除了Jenkins的支持
+- 项目更名为`eeas-fronted`
+- 完善了构建容器的 Dockerfile
+- 添加 Apache 2.0 许可证
+- 移除了 wangeditor
+
 ### 2022-07-16
 
 - 移植自[调查问卷前端](https://github.com/akagiyui/survey-frontend)

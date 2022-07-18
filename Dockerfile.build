@@ -1,2 +1,7 @@
 FROM node:16
-RUN npm i --location=global pnpm
+WORKDIR /code
+RUN npm config set registry https://registry.npmmirror.com \
+&& npm config set disturl https://npmmirror.com/dist --location=global \
+&& npm i --location=global pnpm \
+&& pnpm install \
+&& pnpm build

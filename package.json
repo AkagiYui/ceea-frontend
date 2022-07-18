@@ -1,5 +1,5 @@
 {
-  "name": "ceea-frontend",
+  "name": "eeas-fronted",
   "version": "0.1.0",
   "scripts": {
     "dev": "vite",
@@ -10,8 +10,6 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@wangeditor/editor": "^5.1.1",
-    "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^0.27.2",
     "pinia": "^2.0.14",
     "pinia-plugin-persistedstate": "^1.6.1",

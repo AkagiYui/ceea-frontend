@@ -20,6 +20,6 @@ jobs:
         dst: gitee/AkagiYui
         dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
         dst_token: ${{ secrets.GITEE_TOKEN }}
-        static_list: 'ceea-frontend'
+        static_list: 'eeas-frontend'
         force_update: true
         timeout: '30m'

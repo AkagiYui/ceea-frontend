@@ -10,18 +10,6 @@ import {
 } from "naive-ui";
 import { WeatherMoon16Regular, WeatherSunny16Regular } from "@vicons/fluent";
 import { useStatusStore } from "@/stores/status";
-import "@wangeditor/editor/dist/css/style.css"; // 引入 css
-import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
-import { onBeforeUnmount, ref, shallowRef, onMounted } from "vue";
-
-const editorRef = shallowRef(); // 编辑器实例，必须用 shallowRef
-const valueHtml = ref("<p>hello</p>"); // 内容 HTML
-const toolbarConfig = {};
-const mode = ref("default");
-const editorConfig = { placeholder: "请输入内容..." };
-const handleCreated = (editor: object) => {
-  editorRef.value = editor; // 记录 editor 实例，重要！
-};
 
 const status = useStatusStore();
 
@@ -29,18 +17,18 @@ function setTheme(dark: boolean) {
   status.darkMode = dark;
 }
 
-onMounted(() => {
-  setTimeout(() => {
-    valueHtml.value = "<p>模拟 Ajax 异步设置内容</p>";
-  }, 1500);
-});
-
-// 组件销毁时，也及时销毁编辑器
-onBeforeUnmount(() => {
-  const editor = editorRef.value;
-  if (editor == null) return;
-  editor.destroy();
-});
+function aDialog() {
+  const c = "第一行\n<br>第二行";
+  console.log(c);
+  window.$dialog.success({
+    title: "成功",
+    content: c,
+    positiveText: "哇",
+    loading: true,
+    maskClosable: false,
+    // style: "white-space: pre-line;",
+  });
+}
 </script>
 
 <template>
@@ -52,7 +40,7 @@ onBeforeUnmount(() => {
           width="100"
           src="https://q1.qlogo.cn/g?b=qq&nk=1050314133&s=640"
         />
-        <NButton>更换头像</NButton>
+        <NButton @click="aDialog">更换头像</NButton>
       </NSpace>
     </NCard>
     <NCard title="系统设置">
@@ -146,21 +134,6 @@ onBeforeUnmount(() => {
     </NSpace>
     <div id="vditor" />
     <NButton>t1</NButton>
-    <div style="border: 1px solid #ccc">
-      <Toolbar
-        style="border-bottom: 1px solid #ccc"
-        :editor="editorRef"
-        :defaultConfig="toolbarConfig"
-        :mode="mode"
-      />
-      <Editor
-        style="height: 500px; overflow-y: hidden"
-        v-model="valueHtml"
-        :defaultConfig="editorConfig"
-        :mode="mode"
-        @onCreated="handleCreated"
-      />
-    </div>
   </NSpace>
 </template>
 
