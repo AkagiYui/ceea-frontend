@@ -1,6 +1,6 @@
 # 工程教育认证系统前端 EEASFronted
 
-Engineering Education Accreditation System Backend
+Engineering Education Accreditation System Fronted
 
 将为高校实现完整的学生成绩评定以及回访功能。
 
@@ -44,6 +44,8 @@ NodeJS版本: [v16.15.1](https://nodejs.org/zh-cn/) [下载地址](https://nodej
 
 - [vue ^3.2.37](https://staging-cn.vuejs.org/) 前端框架
 - [vue-router ^4.0.16](https://router.vuejs.org/zh/index.html) 路由控制器
+- [vue-clipboard3 2.0.0](https://github.com/JamieCurnow/vue-clipboard3) 剪贴板操作
+- [qrcode.vue ^3.3.3](https://github.com/scopewu/qrcode.vue) 二维码生成组件
 - [naive-ui ^2.30.7](https://www.naiveui.com/zh-CN/light) Vue3 组件库
 - [axios ^0.27.2](https://axios-http.com/zh/) 异步HTTP客户端
 - [pinia ^2.0.14](https://pinia.vuejs.org/) Vue 状态管理插件

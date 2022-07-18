@@ -1,6 +1,8 @@
 import request from "@/utils/request";
+import sha1 from "sha1";
 
 function getToken(userinfo: { username: string; password: string }) {
+  userinfo.password = sha1(userinfo.password + "kenko");
   return request.request<ServerData>({
     method: "post",
     url: "/user/login",

@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { TITLE } from "@/config";
-import sha1 from "sha1";
 import { ref } from "vue";
 import type { FormInst } from "naive-ui";
 import { NCard, NButton, NInput, NForm, NFormItemRow, NSpace } from "naive-ui";
 import { useStatusStore } from "@/stores/status";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { getToken, getUserInfo } from "@/utils/api";
 interface UserInfo {
   name: string;
 }
 
 const router = useRouter();
+const route = useRoute();
+const redirect = route.query.redirect as string;
 const status = useStatusStore();
 const logged = status.logged;
 const formRef = ref<FormInst | null>(null);
@@ -46,12 +47,7 @@ function handleLogin(e: MouseEvent) {
   e.preventDefault();
   formRef.value?.validate((errors) => {
     if (!errors) {
-      const { username, password } = userValue.value;
-      const loginInfo = {
-        username: username,
-        password: sha1(password + "kenko"),
-      };
-      getToken(loginInfo)
+      getToken(userValue.value)
         .then((response) => {
           const { data } = response;
           const res = data;
@@ -67,7 +63,11 @@ function handleLogin(e: MouseEvent) {
                 const res = data;
                 if (res.code === 200) {
                   status.setUserInfo(res.data as UserInfo);
-                  router.push("/");
+                  if (redirect) {
+                    router.push(redirect);
+                  } else {
+                    router.push("/");
+                  }
                 } else {
                   window.$message.error("用户信息获取失败\n" + res);
                   loadingRef.value = false;

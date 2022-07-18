@@ -89,9 +89,17 @@ const router = createRouter({
       },
     },
     {
-      path: "/success",
-      name: "success",
-      component: () => import("../views/SurveyViews/CommitSucceedView.vue"),
+      path: "/survey/commit",
+      name: "survey-commit",
+      component: () => import("../views/SurveyViews/CommitView.vue"),
+      meta: {
+        title: "填写问卷",
+      },
+    },
+    {
+      path: "/survey/commit/success",
+      name: "survey-commit-success",
+      component: () => import("../views/SurveyViews/CommitSuccessView.vue"),
       meta: {
         title: "成功",
       },

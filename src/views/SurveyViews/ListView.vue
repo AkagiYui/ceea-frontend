@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { reactive, ref, onMounted, h } from "vue";
+import useClipboard from "vue-clipboard3";
+import QrcodeVue from "qrcode.vue";
 import {
   NButton,
   NSpace,
+  NModal,
+  NInputGroup,
   NDataTable,
   NForm,
   NFormItem,
@@ -18,6 +22,7 @@ import {
   createSurvey,
   deleteSurvey,
 } from "@/utils/api";
+import { BASE_URL } from "@/config";
 
 interface SurveyPage {
   pageCount: number;
@@ -44,10 +49,13 @@ interface SurveyPageRaw {
   current: number;
 }
 
+const { toClipboard } = useClipboard();
 const router = useRouter();
 const status = useStatusStore(); // 记录分页大小
 const loadingRef = ref(true); // 加载动画
 const dataRef = ref([]); // 表格数据
+const showShareModal = ref(false); // 显示分享信息
+const shareLink = ref(""); // 分享链接
 
 function createOneSurvey() {
   window.$loadingBar.start();
@@ -98,6 +106,17 @@ function deleteOneSurvey(row: SurveyInfo) {
         });
     },
   });
+}
+
+function shareSurvey(row: SurveyInfo) {
+  shareLink.value = `${BASE_URL}/survey/commit?=${row.id}`;
+  toClipboard(shareLink.value);
+  showShareModal.value = true;
+}
+
+function copyLink() {
+  toClipboard(shareLink.value);
+  window.$message.success(`分享链接已复制到剪贴板，请到浏览器中打开`);
 }
 
 // 顶部搜索表单
@@ -185,7 +204,7 @@ const columnsRef = ref([
   {
     title: "操作",
     key: "action",
-    width: 180,
+    width: 220,
     render(row: SurveyInfo) {
       return h(
         NSpace,
@@ -209,6 +228,15 @@ const columnsRef = ref([
                 onClick: () => deleteOneSurvey(row),
               },
               { default: () => "删除" }
+            ),
+            h(
+              NButton,
+              {
+                size: "small",
+                type: "info",
+                onClick: () => shareSurvey(row),
+              },
+              { default: () => "分享" }
             ),
           ],
         }
@@ -293,6 +321,25 @@ onMounted(() => {
 </script>
 
 <template>
+  <NModal
+    v-model:show="showShareModal"
+    preset="card"
+    :style="{
+      width: '600px',
+    }"
+    transform-origin="center"
+    title="分享"
+    size="huge"
+    :bordered="false"
+  >
+    <NSpace vertical>
+      <NInputGroup>
+        <NInput :value="shareLink" readonly placeholder="分享链接生成失败" />
+        <NButton @click="copyLink">复制</NButton>
+      </NInputGroup>
+      <QrcodeVue :value="shareLink" :size="480" style="margin: 20px" />
+    </NSpace>
+  </NModal>
   <NSpace vertical>
     <NForm
       style="margin-top: 5px"

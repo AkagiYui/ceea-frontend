@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   NH1,
+  NH2,
   NLayout,
   NLayoutHeader,
   NLayoutSider,
@@ -13,6 +14,10 @@ import {
   NIcon,
   NCard,
   NDivider,
+  NRadio,
+  NRadioGroup,
+  NCheckbox,
+  NCheckboxGroup,
   type InputInst,
 } from "naive-ui";
 import { Save20Filled } from "@vicons/fluent";
@@ -26,13 +31,20 @@ interface QuestionType {
   name: string;
 }
 
+interface Question {
+  id: string;
+  type: string;
+  content: string;
+  selections: { id: string; content: string }[];
+}
+
 interface SurveyInfo {
   id: string;
   title: string;
   description: string;
   password: string;
   questionTypes: QuestionType[];
-  questions: [];
+  questions: Question[];
 }
 
 const route = useRoute();
@@ -58,7 +70,13 @@ function getSurvey() {
 }
 
 function addQuestion(type: QuestionType) {
-  console.log(type);
+  const question = {
+    id: "",
+    type: type.id,
+    content: type.name,
+    selections: [],
+  };
+  survey.value.questions.push(question as Question);
 }
 
 watch(editingTitle, (val) => {
@@ -157,43 +175,73 @@ onMounted(() => {
             </NButton>
           </NSpace>
         </NLayoutSider>
-        <NScrollbar class="scro">
-          <NLayoutContent
-            :style="{
-              margin: '30px',
-            }"
-          >
-            <NSpace vertical>
-              <NCard>
-                <NSpace vertical>
-                  <NSpace>
-                    <span>问卷标题</span>
-                    <NInput
-                      show-count
-                      v-model:value="survey.title"
-                      placeholder="请输入标题"
-                      @blur="checkTitle"
-                    />
+        <NSpace vertical>
+          <NScrollbar class="scro">
+            <NLayoutContent
+              :style="{
+                margin: '30px',
+              }"
+            >
+              <NSpace vertical>
+                <NCard>
+                  <NSpace vertical>
+                    <NSpace>
+                      <span>问卷标题</span>
+                      <NInput
+                        show-count
+                        v-model:value="survey.title"
+                        placeholder="请输入标题"
+                        @blur="checkTitle"
+                      />
+                    </NSpace>
+                    <NSpace>
+                      <span>问卷描述</span>
+                      <NInput
+                        show-count
+                        rows="1"
+                        type="textarea"
+                        v-model:value="survey.description"
+                        placeholder="请输入描述"
+                      />
+                    </NSpace>
                   </NSpace>
-                  <NSpace>
-                    <span>问卷描述</span>
-                    <NInput
-                      show-count
-                      rows="1"
-                      type="textarea"
-                      v-model:value="survey.description"
-                      placeholder="请输入描述"
-                    />
+                </NCard>
+                <NCard v-for:="i of survey.questions">
+                  <NSpace vertical>
+                    <NH2>{{ i.content }}</NH2>
+                    <NRadioGroup
+                      v-if="i.type === '1' && i.selections.length > 0"
+                      name="radiogroup"
+                    >
+                      <NSpace vertical>
+                        <NRadio
+                          v-for:="j of i.selections"
+                          :value="j.id"
+                          :label="j.content"
+                        />
+                      </NSpace>
+                    </NRadioGroup>
+                    <NCheckboxGroup
+                      v-else-if="i.type === '2' && i.selections.length > 0"
+                      name="CheckboxGroup"
+                    >
+                      <NSpace vertical>
+                        <NCheckbox
+                          v-for:="j of i.selections"
+                          :value="j.id"
+                          :label="j.content"
+                        />
+                      </NSpace>
+                    </NCheckboxGroup>
+                    <NInput v-else-if="Number(i.type) >= 3" />
+                    <NButton v-if="i.type <= '2'">+ 添加选项</NButton>
                   </NSpace>
-                </NSpace>
-              </NCard>
-              <NCard v-for:="i of survey.questions">
-                {{ i }}
-              </NCard>
-              <NH1>{{ survey }}</NH1>
-            </NSpace>
-          </NLayoutContent>
-        </NScrollbar>
+                </NCard>
+                <NH1>{{ survey }}</NH1>
+              </NSpace>
+            </NLayoutContent>
+          </NScrollbar>
+        </NSpace>
       </NLayout>
     </NLayout>
   </main>
