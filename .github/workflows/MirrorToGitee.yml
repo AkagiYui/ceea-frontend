@@ -1,9 +1,6 @@
 on:
   workflow_dispatch:
   push:
-  # schedule:
-  #   # UTC 21:00 -> CST (China) 5:00
-  #   - cron: '0 21 * * *'
 
 name: Gitee mirror
 
@@ -13,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Mirror the Github repos to Gitee.
-      # https://github.com/Yikun/hub-mirror-action
       uses: Yikun/hub-mirror-action@master
       with:
         src: github/AkagiYui

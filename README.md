@@ -1,6 +1,6 @@
-# 工程教育认证系统前端 EEASFronted
+# 工程教育认证系统前端 EEASFrontend
 
-Engineering Education Accreditation System Fronted
+Engineering Education Accreditation System Frontend
 
 将为高校实现完整的学生成绩评定以及回访功能。
 

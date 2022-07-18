@@ -1,5 +1,5 @@
 {
-  "name": "eeas-fronted",
+  "name": "eeas-frontend",
   "version": "0.1.0",
   "scripts": {
     "dev": "vite",

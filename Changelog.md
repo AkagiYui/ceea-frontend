@@ -13,7 +13,7 @@
 ## 2022-07-18
 
 - 移除了Jenkins的支持
-- 项目更名为`eeas-fronted`
+- 项目更名为`eeas-frontend`
 - 完善了构建容器的 Dockerfile
 - 添加 Apache 2.0 许可证
 - 移除了 wangeditor
